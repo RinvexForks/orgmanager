@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Org;
 use App\User;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -18,7 +18,7 @@ class HomeController extends Controller
         $endpoints->update_org = url('api/org/{id}');
         $endpoints->join = url('api/join/{id}');
         $endpoints->stats = url('api/stats');
-        $endpoints->docs = url('http://docs.orgmanager.apiary.io');
+        $endpoints->docs = url('http://docs.orgmanager.miguelpiedrafita.com');
 
         return response()->json($endpoints);
     }
@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $endpoints = (object) [];
         $endpoints->org = url('api/org/{id}');
-        $endpoints->docs = url('http://docs.orgmanager.apiary.io');
+        $endpoints->docs = url('http://docs.orgmanager.miguelpiedrafita.com');
 
         return response()->json($endpoints);
     }
@@ -38,6 +38,7 @@ class HomeController extends Controller
         $stats->users = User::count();
         $stats->orgs = Org::count();
         $stats->invites = Org::sum('invitecount');
+        $stats->version = config('app.orgmanager.version');
 
         return response()->json($stats);
     }
